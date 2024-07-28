@@ -39,4 +39,3 @@ async function test(){
           await delay(300000);
     }
    
-})();
