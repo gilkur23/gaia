@@ -3,39 +3,47 @@ const fs = require('fs');
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-async function test(){
-    console.log('BOT Auto SendCHAT GAIAN By [Peking404XYogiPrt666]\n\n')
-    const addressList = await fs.readFileSync('keyword.txt', 'utf-8');
-    const addressListArray = await addressList.split('\n');
+;(async () => {
+    try {
+        console.log('BOT Auto SendCHAT GAIAN By [Peking404XYogiPrt666]\n\n');
+        const addressList = await fs.readFileSync('keyword.txt', 'utf-8');
+        const addressListArray = await addressList.split('\n');
 
-    for (let index = 11; index < addressListArray.length; index++) {
-        const Wallet = addressListArray[index];
-        console.log("Content Chat: " + Wallet + "\n");
+        for (let index = 11; index < addressListArray.length; index++) {
+            const Wallet = addressListArray[index];
+            console.log("Content Chat: " + Wallet + "\n");
 
-        const response = await axios.post(
-            'https://nodeidkalian.us.gaianet.network/v1/chat/completions',
-            {
-                'messages': [
-                  {
-                    'role': 'system',
-                    'content': 'You are a helpful assistant.'
-                  },
-                  {
-                    'role': 'user',
-                    'content': `${Wallet}`
-                  }
-                ]
-              },
-            {
-              headers: {
-                'accept': 'application/json',
-                'Content-Type': 'application/json'
-              }
+            try {
+                const response = await axios.post(
+                    'https://NodeIdGaiaMu.us.gaianet.network/v1/chat/completions',
+                    {
+                        'messages': [
+                            {
+                                'role': 'system',
+                                'content': 'You are a helpful assistant.'
+                            },
+                            {
+                                'role': 'user',
+                                'content': `${Wallet}`
+                            }
+                        ]
+                    },
+                    {
+                        headers: {
+                            'accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                );
+
+                console.log("Response: [" + response.data.choices[0].message.content + "]\n");
+                console.log("DONE MEK! \n\n");
+                await delay(30000);
+            } catch (postError) {
+                console.error("Error during axios post: ", postError);
             }
-          );
-          
-          console.log("Response: [" + response.data.choices[0].message.content + "]\n");
-          console.log("Waiting 5 Minutes \n\n");
-          await delay(300000);
+        }
+    } catch (error) {
+        console.error("Error: ", error);
     }
-   
+})();
