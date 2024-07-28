@@ -3,8 +3,7 @@ const fs = require('fs');
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-;(async()=>{
-
+async function test(){
     console.log('BOT Auto SendCHAT GAIAN By [Peking404XYogiPrt666]\n\n')
     const addressList = await fs.readFileSync('keyword.txt', 'utf-8');
     const addressListArray = await addressList.split('\n');
